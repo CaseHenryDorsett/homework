@@ -6,7 +6,7 @@ words(A)->
 
 words(<<>>, Acc1, Acc2)->
     reverse([Acc1|Acc2]);
-words(<<"", Rest/binary>>, Acc1, Acc2)->
+words(<<" ", Rest/binary>>, Acc1, Acc2)->
     words(Rest, <<>>, [Acc1|Acc2]);
 words(<<X, Rest/binary>>, Acc1, Acc2) ->
     words(Rest, <<Acc1/binary, X>>, Acc2).
