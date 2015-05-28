@@ -1,6 +1,10 @@
 -module(p09).
 
--export([pack/3]).
+-export([pack/1]).
 
-pack([H|T], Acc1, Acc2) ->
-	
+pack(L = [_|_]) ->
+	pack(L, [], []);
+pack([]) ->
+	[].
+
+pack([])
