@@ -6,7 +6,7 @@ split(A, B)->
 
 split(<<>>, _, Acc1, Acc2)->
     reverse([Acc1|Acc2]);
-split(<<"-:-", Rest/binary>>, B, Acc1, Acc2) ->
+split(<<X, Y, Z, Rest/binary>>, B, Acc1, Acc2) when [X, Y, Z] == B ->
     split(Rest, B, <<>>, [Acc1|Acc2]);
 split(<<X, Rest/binary>>, B, Acc1, Acc2) ->
     split(Rest, B, <<Acc1/binary, X>>, Acc2).
