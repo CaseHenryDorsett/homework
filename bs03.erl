@@ -6,10 +6,14 @@ split(A, B)->
 
 split(<<>>, _, Acc1, Acc2)->
     reverse([Acc1|Acc2]);
-split(<<X, Y, Z, Rest/binary>>, B, Acc1, Acc2) when [X, Y, Z] == B ->
-    split(Rest, B, <<>>, [Acc1|Acc2]);
-split(<<X, Rest/binary>>, B, Acc1, Acc2) ->
-    split(Rest, B, <<Acc1/binary, X>>, Acc2).
+split(A, B, Acc1, Acc2) ->
+	CLen = length(B), 
+	<<C:CLen/binary, Rest/binary>> = A,
+
+	case binary_to_list(C) == B of
+		true  -> split(Rest, B, <<>>, [Acc1|Acc2]);
+		false -> <<X, Rest/binary>> = A, split(Rest, B, <<Acc1/binary, X>>, Acc2)
+	end.
 
 reverse(List) ->
     reverse(List, []).
